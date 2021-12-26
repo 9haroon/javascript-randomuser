@@ -76,7 +76,7 @@ const  App = () => {
         <div className="card-body ">
         <div className="row">
               <div style={{display:'flex', justifyContent:'end'}} >
-                  <input type="text" onChange={on_change} style={{width:'160px', marginRight:'10px'}}  className="form-control"  placeholder="กรุณาระบุ อายุ..."  />
+                  <input type="text" onChange={on_change}  style={{width:'160px', marginRight:'10px'}}  className="form-control"  placeholder="กรุณาระบุ อายุ..."  />
                   <button type="button" className="btn btn-outline-success" onClick={on_click_filter}>ค้นหา</button>
                </div>
             </div>

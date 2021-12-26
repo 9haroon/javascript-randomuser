@@ -14,7 +14,7 @@ return(
                 </div>
                 <div className="modal-body" >
                     <div className='mb-3' style={{display:'flex', justifyContent:'center'}}>
-                        <img src={props.data.picture?.medium} className='rounded-circle' style={{width:'120px'}}/>
+                        <img src={props.data.picture?.medium}alt="-" className='rounded-circle' style={{width:'120px'}}/>
                     </div>
                     <div>
                         <div className='row' style={{display:'flex', justifyContent:'center'}}>
