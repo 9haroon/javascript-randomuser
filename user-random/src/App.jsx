@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 
+import UserList from "./UserList";
 import "./App.css";
 
 const App = () => {
-  const url = "https://randomuser.me/api/?results=5";
+  const url = "https://randomuser.me/api/?results=50";
   const [user, setUser] = useState([]);
+  const [userAge, setUserAge] = useState("");
   const [sort, setSort] = useState(false);
 
   useEffect(() => {
@@ -14,7 +16,6 @@ const App = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.table(data.results);
         setUser(data.results);
       });
   }, []);
@@ -31,9 +32,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Random Users</h1>
+      <h1>Users</h1>
+      <input type="number" onChange={(e) => setUserAge(e.target.value)} />
 
-      {/* User List */}
       <div className="header">
         <section>Full Name</section>
         <section>
@@ -48,17 +49,15 @@ const App = () => {
         <section>Email</section>
         <section>Tel</section>
       </div>
-      {user.map((user) => {
-        return (
-          <div key={user.email} className="content">
-            <section>{`${user.name.first} ${user.name.last}`}</section>
-            <section>{user.dob.age}</section>
-            <section>{user.gender}</section>
-            <section>{user.email}</section>
-            <section>{user.phone}</section>
-          </div>
-        );
-      })}
+
+      {user
+        .filter((u) => u.dob.age == userAge)
+        .map((user) => (
+          <UserList key={user.email} user={user} />
+        ))}
+
+      {userAge == "" &&
+        user.map((user) => <UserList key={user.email} user={user} />)}
     </div>
   );
 };
