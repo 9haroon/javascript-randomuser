@@ -42,7 +42,7 @@ const App = () => {
         ) : (
           user
             .filter((u) => u.dob.age == userAge)
-            .map((index, user) => <UserList key={index} user={user} />)
+            .map((user, index) => <UserList key={index} user={user} />)
         )}
       </div>
     </div>
