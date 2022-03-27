@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import Paginate from "./component/Paginate";
 import UserList from "./component/UserList";
 import "./App.css";
 
@@ -20,21 +21,29 @@ const App = () => {
   return (
     <div className="App">
       <h1>Users</h1>
-      <input type="number" placeholder="age" onChange={(e) => setUserAge(e.target.value)} />
+      <input
+        type="number"
+        placeholder="age"
+        onChange={(e) => setUserAge(e.target.value)}
+      />
 
-      <div className="header">
-        <section>Full Name</section>
-        <section>Age</section>
-        <section>Gender</section>
-        <section>Email</section>
-        <section>Tel</section>
-      </div>
+      <div className="main">
+        <div className="header">
+          <section>Full Name</section>
+          <section>Age</section>
+          <section>Gender</section>
+          <section>Email</section>
+          <section>Tel</section>
+        </div>
 
-      {userAge == ""
-        ? user.map((user) => <UserList key={user.email} user={user} />)
-        : user
+        {userAge == "" ? (
+          <Paginate user={user} />
+        ) : (
+          user
             .filter((u) => u.dob.age == userAge)
-            .map((user) => <UserList key={user.email} user={user} />)}
+            .map((user) => <UserList key={user.email} user={user} />)
+        )}
+      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import "../App.css";
+
 export default function UserList({ user }) {
   return (
     <div className="content">
