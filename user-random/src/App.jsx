@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import Paginate from "./component/Paginate";
 import UserList from "./component/UserList";
+
 import "./App.css";
 
 const App = () => {
@@ -41,7 +42,7 @@ const App = () => {
         ) : (
           user
             .filter((u) => u.dob.age == userAge)
-            .map((user) => <UserList key={user.email} user={user} />)
+            .map((index, user) => <UserList key={index} user={user} />)
         )}
       </div>
     </div>
