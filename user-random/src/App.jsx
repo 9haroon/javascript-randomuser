@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 
 import Paginate from "./component/Paginate";
-import UserList from "./component/UserList";
+import UserCard from "./component/UserCard";
+import UserModal from "./component/UserModal";
 
-import "./App.css";
+import "./App.scss";
 
 const App = () => {
-  const url = "https://randomuser.me/api/?results=50";
+  const url = "https://randomuser.me/api/?results=102";
+  const [users, setUsers] = useState([]);
   const [user, setUser] = useState([]);
-  const [userAge, setUserAge] = useState("");
+  const [age, setAge] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch(url, {
@@ -16,35 +19,41 @@ const App = () => {
       contentType: "application/json",
     })
       .then((response) => response.json())
-      .then((data) => setUser(data.results));
+      .then((data) => setUsers(data.results));
   }, []);
+
+  const handleClick = (data) => {
+    setUser(data);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className="App">
       <h1>Users</h1>
       <input
         type="number"
-        placeholder="age"
-        onChange={(e) => setUserAge(e.target.value)}
+        placeholder=":age"
+        onChange={(e) => setAge(e.target.value)}
       />
+      <hr />
 
-      <div className="main">
-        <div className="header">
-          <section>Full Name</section>
-          <section>Age</section>
-          <section>Gender</section>
-          <section>Email</section>
-          <section>Tel</section>
+      {age == "" ? (
+        <Paginate users={users} handleClick={handleClick} closeModal={closeModal}/>
+      ) : (
+        <div className="Cards">
+          {users
+            .filter((u) => u.dob.age == age)
+            .map((user, index) => (
+              <UserCard key={index} user={user} handleClick={handleClick} />
+            ))}
         </div>
+      )}
 
-        {userAge == "" ? (
-          <Paginate user={user} />
-        ) : (
-          user
-            .filter((u) => u.dob.age == userAge)
-            .map((user, index) => <UserList key={index} user={user} />)
-        )}
-      </div>
+      {showModal == true && <UserModal user={user} closeModal={closeModal} />}
     </div>
   );
 };

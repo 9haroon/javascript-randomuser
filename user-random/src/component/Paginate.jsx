@@ -1,17 +1,17 @@
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import UserList from "./UserList";
+import UserCard from "./UserCard";
 
-import "../App.css";
+import "./Paginate.scss";
 
-export default function Paginate({ user }) {
+const Paginate = ({ users, handleClick, closeModal }) => {
   const [pageNumber, setPageNumber] = useState(0);
 
-  const usersPerPage = 9;
+  const usersPerPage = 12;
   const pagesVisited = pageNumber * usersPerPage;
 
-  const pageCount = Math.ceil(user.length / usersPerPage);
+  const pageCount = Math.ceil(users.length / usersPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -19,9 +19,14 @@ export default function Paginate({ user }) {
 
   return (
     <div className="paginate">
-      <div className="user-list">
-        {user.slice(pagesVisited, pagesVisited + usersPerPage).map((user) => (
-          <UserList key={user.email} user={user} />
+      <div className="Cards">
+        {users.slice(pagesVisited, pagesVisited + usersPerPage).map((user) => (
+          <UserCard
+            key={user.email}
+            user={user}
+            handleClick={handleClick}
+            closeModal={closeModal}
+          />
         ))}
       </div>
       <ReactPaginate
@@ -37,4 +42,6 @@ export default function Paginate({ user }) {
       />
     </div>
   );
-}
+};
+
+export default Paginate;
