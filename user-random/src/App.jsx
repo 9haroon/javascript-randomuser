@@ -13,6 +13,8 @@ const App = () => {
   const [age, setAge] = useState("");
   const [showModal, setShowModal] = useState(false);
 
+  const filterUser = users.filter((u) => u.dob.age == age)
+
   useEffect(() => {
     fetch(url, {
       method: "GET",
@@ -42,15 +44,19 @@ const App = () => {
       <hr />
 
       {age == "" ? (
-        <Paginate users={users} handleClick={handleClick} closeModal={closeModal}/>
-      ) : (
+        <Paginate
+          users={users}
+          handleClick={handleClick}
+          closeModal={closeModal}
+        />
+      ) : filterUser.length != 0 ? (
         <div className="Cards">
-          {users
-            .filter((u) => u.dob.age == age)
-            .map((user, index) => (
+          {filterUser.map((user, index) => (
               <UserCard key={index} user={user} handleClick={handleClick} />
             ))}
         </div>
+      ) : (
+        <div className="NoData">No Data</div>
       )}
 
       {showModal == true && <UserModal user={user} closeModal={closeModal} />}

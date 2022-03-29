@@ -15,6 +15,7 @@
   }
   hr {
     margin: 1rem;
+    color: lightgrey;
   }
   .Cards {
     width: 60%;
@@ -32,5 +33,9 @@
     @media (max-width: 700px) {
       grid-template-columns: 300px;
     }
+  }
+  .NoData {
+    font-weight: bold;
+    color: red;
   }
 }
