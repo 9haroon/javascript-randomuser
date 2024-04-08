@@ -1,0 +1,1 @@
+export { default as RandomMeModel} from './random-me.model'
