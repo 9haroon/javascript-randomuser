@@ -1,0 +1,35 @@
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .profile {
+    background: white;
+    padding: 0.5rem;
+    margin-top: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 0px #00000070;
+    display: flex;
+
+    img {
+      margin: auto;
+      border-radius: 50%;
+      border: 5px solid grey;
+    }
+    div {
+      margin: 1rem auto;
+      text-align: left;
+    }
+  }
+}
